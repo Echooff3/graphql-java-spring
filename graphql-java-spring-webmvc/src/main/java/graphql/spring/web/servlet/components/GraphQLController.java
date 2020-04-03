@@ -63,7 +63,7 @@ public class GraphQLController {
         //   "variables": { "myVariable": "someValue", ... }
         // }
 
-        if (MediaType.APPLICATION_JSON_VALUE.equals(contentType)) {
+        if (MediaType.APPLICATION_JSON_VALUE.contains(contentType)) {
             GraphQLRequestBody request = jsonSerializer.deserialize(body, GraphQLRequestBody.class);
             if (request.getQuery() == null) {
                 request.setQuery("");
@@ -83,7 +83,7 @@ public class GraphQLController {
         // * If the "application/graphql" Content-Type header is present,
         //   treat the HTTP POST body contents as the GraphQL query string.
 
-        if ("application/graphql".equals(contentType)) {
+        if ("application/graphql".contains(contentType)) {
             return executeRequest(body, null, null, webRequest);
         }
 
